@@ -12,11 +12,24 @@
                 <form action="/chat.html">
                     <label>Display name</label>
                     <input type="text" placeholder="Display name" name="username" required>
-                    <label>Room</label>
-                    <input type="text" placeholder="Room" name="room" required>
+                    <div id="room-input"></div>
                     <button>Join</button>
                 </form>
             </div>
         </div>
+
+        <script type="text/html" id="room-template">
+            <label>Room</label>
+            <input type="text" placeholder="Room" name="room" list="rooms-options" autocomplete="off" required>
+            <datalist id="rooms-options">
+                {{#rooms}}
+                    <option value="{{.}}">
+                {{/rooms}}
+            </datalist>
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/index.js"></script>
     </body>
 </html>

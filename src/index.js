@@ -4,7 +4,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 const { generateMessage, generateLocationMessage } = require('./utils/messages')
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./utils/users.js')
+const { addUser, removeUser, getUser, getUsersInRoom, getRooms } = require('./utils/users.js')
 
 const app = express()
 const server = http.createServer(app)
@@ -73,6 +73,10 @@ io.on('connection', (socket) => {
 
         io.to(user.room).emit('locationMessage', generateLocationMessage(user.username,`https://google.com/maps?q=${lati},${long}`))
         callback();
+    })
+
+    socket.on('getRooms', (callback) => { 
+        callback(getRooms());
     })
 })
 
